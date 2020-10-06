@@ -8,7 +8,7 @@ pipeline {
 		mavenHome = tool "myMaven"
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
 		registry = "https://hub.docker.com/r/efleitasch/"
-        registryCredential = 'dockerhub' 
+		registryCredential = "dockerhub"
 	}
 	stages {
 		stage('Chekcout') {
