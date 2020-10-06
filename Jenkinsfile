@@ -7,7 +7,7 @@ pipeline {
 		dockerHome = tool "myDocker"
 		mavenHome = tool "myMaven"
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
-		registry = "efleitasch/currency-exchange-devops"
+//		registry = "efleitasch/currency-exchange-devops"
         registryCredential = 'dockerhub_id'
 	}
 	stages {
@@ -55,7 +55,7 @@ pipeline {
 		stage('Push Docker Image') {
 			steps {
               script {
-				  docker.withRegistry('', 'registryCredential' ) {				
+				  docker.withRegistry('', registryCredential ) {				
 					dockerImage.push()				  
 				  }			
 			  }
