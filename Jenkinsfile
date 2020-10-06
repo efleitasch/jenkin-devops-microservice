@@ -48,7 +48,7 @@ pipeline {
 			steps {
               //"docker build -t efleitasch/currency-exchange-devops:$env.BUILD_TAG"
 			  script {
-				  docker.build("${registry}:${env.BUILD_TAG}")
+				  docker.build("efleitasch/currency-exchange-devops:${env.BUILD_TAG}")
 			  }
 			}
 		}
