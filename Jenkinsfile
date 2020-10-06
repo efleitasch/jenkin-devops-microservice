@@ -56,8 +56,8 @@ pipeline {
 			steps {
               script {
 				  docker.withRegistry('', 'dockerhub_id' ) {				
-					dockerImage.push();				  
-				  	dockerImage.push('latest');
+					docker.image.push();				  
+				  	docker.image.push('latest');
 				  }			
 			  }
 			}
