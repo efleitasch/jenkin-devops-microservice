@@ -7,8 +7,8 @@ pipeline {
 		dockerHome = tool "myDocker"
 		mavenHome = tool "myMaven"
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
-		//registry = "https://hub.docker.com/r/efleitasch/"
-		//registryCredential = "docker-hub"
+		registry = "efleitasch/currency-exchange-devops"
+        registryCredential = 'dockerhub_id'
 	}
 	stages {
 		stage('Chekcout') {
@@ -48,16 +48,15 @@ pipeline {
 			steps {
               //"docker build -t efleitasch/currency-exchange-devops:$env.BUILD_TAG"
 			  script {
-				  docker.build("efleitasch/currency-exchange-devops:${env.BUILD_TAG}")
+				  docker.build("${registry}:${env.BUILD_TAG}")
 			  }
 			}
 		}
 		stage('Push Docker Image') {
 			steps {
               script {
-				  docker.withRegistry('', 'dockerhub_id' ) {				
-					docker.image.push();				  
-				  	docker.image.push('latest');
+				  docker.withRegistry('', 'registryCredential' ) {				
+					dockerImage.push()				  
 				  }			
 			  }
 			}
