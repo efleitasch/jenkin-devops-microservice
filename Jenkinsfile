@@ -7,6 +7,8 @@ pipeline {
 		dockerHome = tool "myDocker"
 		mavenHome = tool "myMaven"
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+		registry = "https://hub.docker.com/r/efleitasch/"
+        registryCredential = 'dockerhub' 
 	}
 	stages {
 		stage('Chekcout') {
@@ -53,7 +55,7 @@ pipeline {
 		stage('Push Docker Image') {
 			steps {
               script {
-				  docker.withRegistry('', 'dockerhub') {				
+				  docker.withRegistry('', registryCredential ) {				
 					dockerImage.push();				  
 				  	dockerImage.push('latest');
 				  }			
